@@ -1,7 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define _CRT_SECURE_NO_WARNINGS
 #define MAX_RECORDS 100
 #define MAX_COMPONENTS 9
 
