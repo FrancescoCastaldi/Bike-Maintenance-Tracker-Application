@@ -32,25 +32,10 @@ Component components[MAX_COMPONENTS] = {
 int recordCount = 0;
 double bikeWeight = 0.0;
 
-void loadRecords() {
-    FILE* file = fopen("records.txt", "r");
-    if (file == NULL) {
-        printf("No maintenance records found.\n");
-        return;
-    }
-    fscanf(file, "%d\n", &recordCount);
-    for (int i = 0; i < recordCount; i++) {
-        fscanf(file, "%10s\n", records[i].date);
-        fgets(records[i].description, 256, file);
-        records[i].description[strcspn(records[i].description, "\n")] = 0; // remove newline character
-    }
-    fclose(file);
-}
-
 void saveRecords() {
     FILE* file = fopen("records.txt", "w");
     if (file == NULL) {
-        printf("Error saving records.\n");
+        printf("Error saving records. 😢\n");
         return;
     }
     fprintf(file, "%d\n", recordCount);
@@ -61,23 +46,69 @@ void saveRecords() {
     fclose(file);
 }
 
-void loadComponents() {
-    FILE* file = fopen("components.txt", "r");
+void loadRecords() {
+    FILE* file = fopen("records.txt", "r");
     if (file == NULL) {
-        printf("No components data found.\n");
+        printf("No maintenance records found. Creating records.txt. 🙂\n");
+        recordCount = 0;
+        saveRecords();
         return;
     }
-    fscanf(file, "%lf\n", &bikeWeight);
-    for (int i = 0; i < MAX_COMPONENTS; i++) {
-        fscanf(file, "%d\n", &components[i].wearLevel);
+
+    int count = 0;
+    if (fscanf(file, "%d\n", &count) != 1) {
+        printf("Unable to read maintenance records count. Resetting records file. 😕\n");
+        recordCount = 0;
+        fclose(file);
+        saveRecords();
+        return;
     }
+
+    int sanitized = 0;
+    if (count < 0) {
+        printf("Invalid maintenance record count encountered. Resetting to zero. ⚠️\n");
+        count = 0;
+        sanitized = 1;
+    }
+
+    if (count > MAX_RECORDS) {
+        printf("Warning: Only the first %d of %d maintenance records will be loaded. ⚠️\n", MAX_RECORDS, count);
+    }
+
+    int storedRecords = 0;
+    for (int i = 0; i < count; i++) {
+        MaintenanceRecord tempRecord;
+        if (fscanf(file, "%10s\n", tempRecord.date) != 1) {
+            printf("Encountered an incomplete maintenance record entry. 😕\n");
+            sanitized = 1;
+            break;
+        }
+
+        if (fgets(tempRecord.description, sizeof(tempRecord.description), file) == NULL) {
+            printf("Encountered an incomplete maintenance record description. 😕\n");
+            sanitized = 1;
+            break;
+        }
+
+        tempRecord.description[strcspn(tempRecord.description, "\n")] = 0; // remove newline character
+
+        if (storedRecords < MAX_RECORDS) {
+            records[storedRecords++] = tempRecord;
+        }
+    }
+
     fclose(file);
+    recordCount = storedRecords;
+
+    if (sanitized) {
+        saveRecords();
+    }
 }
 
 void saveComponents() {
     FILE* file = fopen("components.txt", "w");
     if (file == NULL) {
-        printf("Error saving components.\n");
+        printf("Error saving components. 😢\n");
         return;
     }
     fprintf(file, "%.2f\n", bikeWeight);
@@ -87,91 +118,125 @@ void saveComponents() {
     fclose(file);
 }
 
-void addRecord() {
-    if (recordCount >= MAX_RECORDS) {
-        printf("No more space for new records.\n");
+void loadComponents() {
+    FILE* file = fopen("components.txt", "r");
+    if (file == NULL) {
+        printf("No components data found. Creating components.txt with default values. 🙂\n");
+        bikeWeight = 0.0;
+        for (int i = 0; i < MAX_COMPONENTS; i++) {
+            components[i].wearLevel = 0;
+        }
+        saveComponents();
         return;
     }
-    printf("Enter date (YYYY-MM-DD): ");
+
+    int sanitized = 0;
+    if (fscanf(file, "%lf\n", &bikeWeight) != 1) {
+        printf("Unable to read bike weight from components file. Resetting to 0. 😕\n");
+        bikeWeight = 0.0;
+        sanitized = 1;
+    }
+
+    for (int i = 0; i < MAX_COMPONENTS; i++) {
+        if (fscanf(file, "%d\n", &components[i].wearLevel) != 1) {
+            printf("Missing wear level information for %s. Resetting to 0. 😕\n", components[i].name);
+            components[i].wearLevel = 0;
+            sanitized = 1;
+        }
+    }
+
+    fclose(file);
+
+    if (sanitized) {
+        saveComponents();
+    }
+}
+
+void addRecord() {
+    if (recordCount >= MAX_RECORDS) {
+        printf("No more space for new records. 😞\n");
+        return;
+    }
+    printf("Enter date (YYYY-MM-DD): ✏️ ");
     scanf("%10s", records[recordCount].date);
     getchar(); // consume newline character
-    printf("Enter description: ");
+    printf("Enter description: ✏️ ");
     fgets(records[recordCount].description, 256, stdin);
     records[recordCount].description[strcspn(records[recordCount].description, "\n")] = 0; // remove newline character
     recordCount++;
     saveRecords();
-    printf("Record added successfully!\n");
+    printf("Record added successfully! 😄\n");
 }
 
 void viewRecords() {
     loadRecords(); // Ensure records are reloaded from the file
     if (recordCount == 0) {
-        printf("No maintenance records found.\n");
+        printf("No maintenance records found. 😕\n");
     }
     else {
-        printf("Maintenance Records:\n");
+        printf("Maintenance Records: 📋\n");
         for (int i = 0; i < recordCount; i++) {
-            printf("Date: %s, Description: %s\n", records[i].date, records[i].description);
+            printf("Date: %s, Description: %s ✨\n", records[i].date, records[i].description);
         }
     }
 }
 
 void updateBikeWeight() {
-    printf("Enter the bike weight (kg): ");
+    printf("Enter the bike weight (kg): ⚖️ ");
     scanf("%lf", &bikeWeight);
     saveComponents();
-    printf("Bike weight updated successfully!\n");
+    printf("Bike weight updated successfully! 💪\n");
 }
 
 void viewBikeWeight() {
     loadComponents(); // Ensure components data is reloaded from the file
-    printf("Bike Weight: %.2f kg\n", bikeWeight);
+    printf("Bike Weight: %.2f kg 🚲\n", bikeWeight);
 }
 
 void viewComponents() {
     loadComponents(); // Ensure components data is reloaded from the file
-    printf("Bike Components and Their Wear Levels:\n");
+    printf("Bike Components and Their Wear Levels: 🧰\n");
     for (int i = 0; i < MAX_COMPONENTS; i++) {
-        printf("%s (Wear Level: %d%%)\n", components[i].name, components[i].wearLevel);
+        printf("%s (Wear Level: %d%%) 🔧\n", components[i].name, components[i].wearLevel);
     }
 }
 
 void updateComponentWearLevel() {
-    printf("Select a component to update wear level:\n");
+    printf("Select a component to update wear level: 🛠️\n");
     for (int i = 0; i < MAX_COMPONENTS; i++) {
         printf("%d. %s\n", i + 1, components[i].name);
     }
-    printf("Choose an option: ");
+    printf("Choose an option: ➡️ ");
     int choice;
     scanf("%d", &choice);
     if (choice >= 1 && choice <= MAX_COMPONENTS) {
-        printf("Enter new wear level (0-100%%): ");
+        printf("Enter new wear level (0-100%%): 🎯 ");
         int wearLevel;
         scanf("%d", &wearLevel);
         if (wearLevel >= 0 && wearLevel <= 100) {
             components[choice - 1].wearLevel = wearLevel;
             saveComponents();
-            printf("Wear level updated successfully!\n");
+            printf("Wear level updated successfully! 😄\n");
         }
         else {
-            printf("Invalid wear level. Please try again.\n");
+            printf("Invalid wear level. Please try again. 😕\n");
         }
     }
     else {
-        printf("Invalid choice. Please try again.\n");
+        printf("Invalid choice. Please try again. 😕\n");
     }
 }
 
 void showMenu() {
-    printf("\nBike Maintenance Tracker\n");
-    printf("1. Add Maintenance Record\n");
-    printf("2. View Maintenance Records\n");
-    printf("3. Update Bike Weight\n");
-    printf("4. View Bike Weight\n");
-    printf("5. View Components and Wear Levels\n");
-    printf("6. Update Component Wear Level\n");
-    printf("7. Exit\n");
-    printf("Choose an option: ");
+    printf("\nBike Maintenance Tracker 🚲\n");
+    printf("1. Add Maintenance Record ✍️\n");
+    printf("2. View Maintenance Records 📖\n");
+    printf("3. Update Bike Weight ⚖️\n");
+    printf("4. View Bike Weight 👀⚖️\n");
+    printf("5. View Components and Wear Levels 🧰\n");
+    printf("6. Update Component Wear Level 🛠️\n");
+    printf("7. Exit 👋\n");
+    printf("Choose an option: ➡️ ");
 }
 
 int main() {
@@ -202,10 +267,10 @@ int main() {
             updateComponentWearLevel();
             break;
         case 7:
-            printf("Exiting... Goodbye!\n");
+            printf("Exiting... Goodbye! 👋\n");
             return 0;
         default:
-            printf("Invalid choice. Please try again.\n");
+            printf("Invalid choice. Please try again. 😕\n");
         }
     }
 }
