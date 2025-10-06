@@ -36,14 +36,48 @@ void loadRecords() {
     FILE* file = fopen("records.txt", "r");
     if (file == NULL) {
         printf("No maintenance records found.\n");
+        recordCount = 0;
         return;
     }
-    fscanf(file, "%d\n", &recordCount);
-    for (int i = 0; i < recordCount; i++) {
-        fscanf(file, "%10s\n", records[i].date);
-        fgets(records[i].description, 256, file);
-        records[i].description[strcspn(records[i].description, "\n")] = 0; // remove newline character
+
+    int count = 0;
+    if (fscanf(file, "%d\n", &count) != 1) {
+        printf("Unable to read maintenance records count.\n");
+        recordCount = 0;
+        fclose(file);
+        return;
     }
+
+    if (count < 0) {
+        printf("Invalid maintenance record count encountered.\n");
+        count = 0;
+    }
+
+    if (count > MAX_RECORDS) {
+        printf("Warning: Only the first %d of %d maintenance records will be loaded.\n", MAX_RECORDS, count);
+    }
+
+    int storedRecords = 0;
+    for (int i = 0; i < count; i++) {
+        MaintenanceRecord tempRecord;
+        if (fscanf(file, "%10s\n", tempRecord.date) != 1) {
+            printf("Encountered an incomplete maintenance record entry.\n");
+            break;
+        }
+
+        if (fgets(tempRecord.description, sizeof(tempRecord.description), file) == NULL) {
+            printf("Encountered an incomplete maintenance record description.\n");
+            break;
+        }
+
+        tempRecord.description[strcspn(tempRecord.description, "\n")] = 0; // remove newline character
+
+        if (storedRecords < MAX_RECORDS) {
+            records[storedRecords++] = tempRecord;
+        }
+    }
+
+    recordCount = storedRecords;
     fclose(file);
 }
 
@@ -65,12 +99,25 @@ void loadComponents() {
     FILE* file = fopen("components.txt", "r");
     if (file == NULL) {
         printf("No components data found.\n");
+        bikeWeight = 0.0;
+        for (int i = 0; i < MAX_COMPONENTS; i++) {
+            components[i].wearLevel = 0;
+        }
         return;
     }
-    fscanf(file, "%lf\n", &bikeWeight);
-    for (int i = 0; i < MAX_COMPONENTS; i++) {
-        fscanf(file, "%d\n", &components[i].wearLevel);
+
+    if (fscanf(file, "%lf\n", &bikeWeight) != 1) {
+        printf("Unable to read bike weight from components file.\n");
+        bikeWeight = 0.0;
     }
+
+    for (int i = 0; i < MAX_COMPONENTS; i++) {
+        if (fscanf(file, "%d\n", &components[i].wearLevel) != 1) {
+            printf("Missing wear level information for %s. Resetting to 0.\n", components[i].name);
+            components[i].wearLevel = 0;
+        }
+    }
+
     fclose(file);
 }
 
