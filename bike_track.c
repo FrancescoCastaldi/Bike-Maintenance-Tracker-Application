@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define MAX_RECORDS 100
 #define MAX_COMPONENTS 9
 
@@ -90,7 +91,7 @@ void loadRecords() {
             break;
         }
 
-        tempRecord.description[strcspn(tempRecord.description, "\n")] = 0; // remove newline character
+        tempRecord.description[strcspn(tempRecord.description, "\n")] = 0; // remove newline
 
         if (storedRecords < MAX_RECORDS) {
             records[storedRecords++] = tempRecord;
@@ -159,10 +160,10 @@ void addRecord() {
     }
     printf("Enter date (YYYY-MM-DD): ✏️ ");
     scanf("%10s", records[recordCount].date);
-    getchar(); // consume newline character
+    getchar(); // consume newline
     printf("Enter description: ✏️ ");
     fgets(records[recordCount].description, 256, stdin);
-    records[recordCount].description[strcspn(records[recordCount].description, "\n")] = 0; // remove newline character
+    records[recordCount].description[strcspn(records[recordCount].description, "\n")] = 0; // remove newline
     recordCount++;
     saveRecords();
     printf("Record added successfully! 😄\n");
@@ -172,8 +173,7 @@ void viewRecords() {
     loadRecords(); // Ensure records are reloaded from the file
     if (recordCount == 0) {
         printf("No maintenance records found. 😕\n");
-    }
-    else {
+    } else {
         printf("Maintenance Records: 📋\n");
         for (int i = 0; i < recordCount; i++) {
             printf("Date: %s, Description: %s ✨\n", records[i].date, records[i].description);
@@ -217,12 +217,10 @@ void updateComponentWearLevel() {
             components[choice - 1].wearLevel = wearLevel;
             saveComponents();
             printf("Wear level updated successfully! 😄\n");
-        }
-        else {
+        } else {
             printf("Invalid wear level. Please try again. 😕\n");
         }
-    }
-    else {
+    } else {
         printf("Invalid choice. Please try again. 😕\n");
     }
 }
@@ -246,31 +244,32 @@ int main() {
         showMenu();
         int choice;
         scanf("%d", &choice);
-        getchar(); // consume newline character
+        getchar(); // consume newline
         switch (choice) {
-        case 1:
-            addRecord();
-            break;
-        case 2:
-            viewRecords();
-            break;
-        case 3:
-            updateBikeWeight();
-            break;
-        case 4:
-            viewBikeWeight();
-            break;
-        case 5:
-            viewComponents();
-            break;
-        case 6:
-            updateComponentWearLevel();
-            break;
-        case 7:
-            printf("Exiting... Goodbye! 👋\n");
-            return 0;
-        default:
-            printf("Invalid choice. Please try again. 😕\n");
+            case 1:
+                addRecord();
+                break;
+            case 2:
+                viewRecords();
+                break;
+            case 3:
+                updateBikeWeight();
+                break;
+            case 4:
+                viewBikeWeight();
+                break;
+            case 5:
+                viewComponents();
+                break;
+            case 6:
+                updateComponentWearLevel();
+                break;
+            case 7:
+                printf("Exiting... Goodbye! 👋\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again. 😕\n");
         }
     }
 }
+
