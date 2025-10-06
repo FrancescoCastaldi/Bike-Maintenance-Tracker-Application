@@ -18,6 +18,33 @@ The Bike Maintenance Tracker is a command-line application designed to assist cy
   - View the wear levels of key bike components, including tires, inner tubes, derailleur cables, brake cables, and handlebar tape.
   - Update the wear levels of each component to ensure timely replacements and maintenance.
 
+## Esecuzione su Windows con PowerShell
+
+Per facilitare l'esecuzione dell'applicazione su Windows è stato aggiunto lo script `run.ps1`, pensato per l'uso in PowerShell.
+
+### Prerequisiti
+
+1. Installare un compilatore C disponibile da PowerShell, come **Mingw-w64 (gcc)** oppure **LLVM (clang)**, e assicurarsi che il comando scelto sia presente nella variabile d'ambiente `PATH`.
+2. Se PowerShell blocca l'esecuzione degli script, aprire una finestra di PowerShell e abilitare temporaneamente l'esecuzione con:
+
+   ```powershell
+   Set-ExecutionPolicy -Scope Process RemoteSigned
+   ```
+
+### Compilazione ed esecuzione
+
+All'interno della cartella del progetto eseguire:
+
+```powershell
+./run.ps1
+```
+
+Lo script individua automaticamente il compilatore disponibile (`gcc` o `clang`), compila `bike_track.c` generando `bike_track.exe` (ricompilando solo se necessario) e avvia l'applicazione. È possibile forzare una ricompilazione completa con il parametro `-Clean`:
+
+```powershell
+./run.ps1 -Clean
+```
+
 ## Implementation Details
 
 The application is developed in C, leveraging standard input/output functions to interact with the user and file handling to persist data. The main components of the application include:
