@@ -32,8 +32,19 @@ Component components[MAX_COMPONENTS] = {
 int recordCount = 0;
 double bikeWeight = 0.0;
 
-void saveRecords();
-void saveComponents();
+void saveRecords() {
+    FILE* file = fopen("records.txt", "w");
+    if (file == NULL) {
+        printf("Error saving records.\n");
+        return;
+    }
+    fprintf(file, "%d\n", recordCount);
+    for (int i = 0; i < recordCount; i++) {
+        fprintf(file, "%s\n", records[i].date);
+        fprintf(file, "%s\n", records[i].description);
+    }
+    fclose(file);
+}
 
 void loadRecords() {
     FILE* file = fopen("records.txt", "r");
@@ -94,16 +105,15 @@ void loadRecords() {
     }
 }
 
-void saveRecords() {
-    FILE* file = fopen("records.txt", "w");
+void saveComponents() {
+    FILE* file = fopen("components.txt", "w");
     if (file == NULL) {
-        printf("Error saving records.\n");
+        printf("Error saving components.\n");
         return;
     }
-    fprintf(file, "%d\n", recordCount);
-    for (int i = 0; i < recordCount; i++) {
-        fprintf(file, "%s\n", records[i].date);
-        fprintf(file, "%s\n", records[i].description);
+    fprintf(file, "%.2f\n", bikeWeight);
+    for (int i = 0; i < MAX_COMPONENTS; i++) {
+        fprintf(file, "%d\n", components[i].wearLevel);
     }
     fclose(file);
 }
@@ -140,19 +150,6 @@ void loadComponents() {
     if (sanitized) {
         saveComponents();
     }
-}
-
-void saveComponents() {
-    FILE* file = fopen("components.txt", "w");
-    if (file == NULL) {
-        printf("Error saving components.\n");
-        return;
-    }
-    fprintf(file, "%.2f\n", bikeWeight);
-    for (int i = 0; i < MAX_COMPONENTS; i++) {
-        fprintf(file, "%d\n", components[i].wearLevel);
-    }
-    fclose(file);
 }
 
 void addRecord() {
