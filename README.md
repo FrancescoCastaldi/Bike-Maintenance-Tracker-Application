@@ -4,6 +4,8 @@
 
 The Bike Maintenance Tracker is a command-line application designed to assist cycling enthusiasts in maintaining and managing their road bikes. This application allows users to add, view, and update maintenance records, track the weight of the bike, and monitor the wear levels of various components. By providing a structured and easy-to-use interface, it ensures that users can keep their bikes in optimal condition.
 
+As an alternative to the console workflow, the project now also offers a modern graphical interface powered by [ttkbootstrap](https://ttkbootstrap.readthedocs.io/) that reads and writes the same data files (`records.txt` and `components.txt`).
+
 ## Features
 
 - **Maintenance Records Management:**
@@ -17,6 +19,35 @@ The Bike Maintenance Tracker is a command-line application designed to assist cy
 - **Component Wear Level Monitoring:**
   - View the wear levels of key bike components, including tires, inner tubes, derailleur cables, brake cables, and handlebar tape.
   - Update the wear levels of each component to ensure timely replacements and maintenance.
+
+## Interfaccia Grafica (Windows, macOS e Linux)
+
+### Prerequisiti
+
+- [Python 3.9+](https://www.python.org/downloads/)
+- Accesso a Internet per consentire a `pip` di installare il tema grafico `ttkbootstrap`
+
+### Avvio manuale (tutte le piattaforme)
+
+All'interno della cartella del progetto eseguire i seguenti comandi:
+
+```bash
+python -m venv .venv-gui
+source .venv-gui/bin/activate  # Su Windows usare: .venv-gui\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python bike_maintenance_gui.py
+```
+
+### Avvio rapido su Windows
+
+Per automatizzare l'installazione delle dipendenze e l'avvio dell'applicazione grafica è disponibile lo script `run_gui.bat`. Eseguire:
+
+```bat
+run_gui.bat
+```
+
+Lo script crea (se necessario) un ambiente virtuale locale, installa le dipendenze definite in `requirements.txt` e avvia l'interfaccia grafica.
 
 ## Esecuzione su Windows con PowerShell
 
