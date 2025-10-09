@@ -19,6 +19,38 @@ As an alternative to the console workflow, the project now also offers a modern 
 - **Component Wear Level Monitoring:**
   - View the wear levels of key bike components, including tires, inner tubes, derailleur cables, brake cables, and handlebar tape.
   - Update the wear levels of each component to ensure timely replacements and maintenance.
+- **Futuristic Desktop Dashboard:**
+  - Interfaccia grafica in stile "tech" con header animato, palette neon e card riepilogative aggiornate in tempo reale.
+  - Nuova scheda *Diagnostics* con grafico delle usure, elenco componenti critici e suggerimenti di manutenzione immediati.
+
+## Interfaccia Grafica (Windows, macOS e Linux)
+
+### Prerequisiti
+
+- [Python 3.9+](https://www.python.org/downloads/)
+- Accesso a Internet per consentire a `pip` di installare il tema grafico `ttkbootstrap` e le librerie aggiuntive (`matplotlib`)
+
+### Avvio manuale (tutte le piattaforme)
+
+All'interno della cartella del progetto eseguire i seguenti comandi:
+
+```bash
+python -m venv .venv-gui
+source .venv-gui/bin/activate  # Su Windows usare: .venv-gui\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python bike_maintenance_gui.py
+```
+
+### Avvio rapido su Windows
+
+Per automatizzare l'installazione delle dipendenze e l'avvio dell'applicazione grafica è disponibile lo script `run_gui.bat`. Eseguire:
+
+```bat
+run_gui.bat
+```
+
+Lo script crea (se necessario) un ambiente virtuale locale, installa le dipendenze definite in `requirements.txt` e avvia l'interfaccia grafica.
 
 ## Interfaccia Grafica (Windows, macOS e Linux)
 
