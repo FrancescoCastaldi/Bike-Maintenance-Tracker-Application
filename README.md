@@ -11,6 +11,7 @@ As an alternative to the console workflow, the project now also offers a modern 
 - **Maintenance Records Management:**
   - Add new maintenance records with the date and a detailed description of the service performed.
   - View a list of all maintenance records to keep track of past services.
+  - Use the quick-entry panel at the top of the GUI to capture new events without leaving the main dashboard.
 
 - **Bike Weight Tracking:**
   - Update and store the weight of the bike.
