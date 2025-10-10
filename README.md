@@ -4,7 +4,7 @@
 
 The Bike Maintenance Tracker is a command-line application designed to assist cycling enthusiasts in maintaining and managing their road bikes. This application allows users to add, view, and update maintenance records, track the weight of the bike, and monitor the wear levels of various components. By providing a structured and easy-to-use interface, it ensures that users can keep their bikes in optimal condition.
 
-As an alternative to the console workflow, the project now also offers a modern graphical interface powered by [ttkbootstrap](https://ttkbootstrap.readthedocs.io/) and enhanced with analytics provided by [Matplotlib](https://matplotlib.org/). The UI can reuse the existing `records.txt` and `components.txt` files in the project folder, or it can store the data inside a user-selected directory on the computer for long-term archiving.
+As an alternative to the console workflow, the project now also offers a modern graphical interface powered by [ttkbootstrap](https://ttkbootstrap.readthedocs.io/) that reads and writes the same data files (`records.txt` and `components.txt`).
 
 ## Features
 
@@ -12,7 +12,6 @@ As an alternative to the console workflow, the project now also offers a modern 
   - Add new maintenance records with the date and a detailed description of the service performed.
   - View a list of all maintenance records to keep track of past services.
   - Use the quick-entry panel at the top of the GUI to capture new events without leaving the main dashboard.
-  - Registra azioni rapide (ad esempio cambio gomma, cambio olio) con un click: l'evento viene salvato nella lista principale e annotato anche nel file dedicato `quick_actions.txt`.
 
 - **Bike Weight Tracking:**
   - Update and store the weight of the bike.
@@ -24,7 +23,6 @@ As an alternative to the console workflow, the project now also offers a modern 
 - **Futuristic Desktop Dashboard:**
   - Interfaccia grafica in stile "tech" con header animato, palette neon e card riepilogative aggiornate in tempo reale.
   - Nuova scheda *Diagnostics* con grafico delle usure, elenco componenti critici e suggerimenti di manutenzione immediati.
-  - Selettore di cartella dedicato per scegliere dove salvare i file di log (`records.txt`) e componenti (`components.txt`) direttamente dall'interfaccia.
 
 ## Interfaccia Grafica (Windows, macOS e Linux)
 
@@ -55,12 +53,34 @@ run_gui.bat
 
 Lo script crea (se necessario) un ambiente virtuale locale, installa le dipendenze definite in `requirements.txt` e avvia l'interfaccia grafica.
 
-### Cartella dati personalizzabile
+## Interfaccia Grafica (Windows, macOS e Linux)
 
-- Al primo avvio l'applicazione cerca eventuali file `records.txt` e `components.txt` accanto allo script; in caso contrario propone automaticamente una cartella dedicata all'interno di `Documenti` (o, se non disponibile, nella home dell'utente).
-- Il pannello "Quick Record Entry" mostra sempre il percorso correntemente in uso e offre il pulsante **Change Folder** per scegliere una destinazione diversa.
-- Quando si cambia cartella, i dati correnti vengono copiati nella nuova posizione e la dashboard si aggiorna immediatamente per riflettere il contenuto del percorso selezionato.
-- Oltre a `records.txt` e `components.txt` la cartella conterrà anche `quick_actions.txt`, ossia il registro cronologico delle scorciatoie inserite dal pannello rapido.
+### Prerequisiti
+
+- [Python 3.9+](https://www.python.org/downloads/)
+- Accesso a Internet per consentire a `pip` di installare il tema grafico `ttkbootstrap`
+
+### Avvio manuale (tutte le piattaforme)
+
+All'interno della cartella del progetto eseguire i seguenti comandi:
+
+```bash
+python -m venv .venv-gui
+source .venv-gui/bin/activate  # Su Windows usare: .venv-gui\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python bike_maintenance_gui.py
+```
+
+### Avvio rapido su Windows
+
+Per automatizzare l'installazione delle dipendenze e l'avvio dell'applicazione grafica è disponibile lo script `run_gui.bat`. Eseguire:
+
+```bat
+run_gui.bat
+```
+
+Lo script crea (se necessario) un ambiente virtuale locale, installa le dipendenze definite in `requirements.txt` e avvia l'interfaccia grafica.
 
 ## Esecuzione su Windows con PowerShell
 
