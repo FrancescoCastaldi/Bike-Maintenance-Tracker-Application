@@ -118,6 +118,15 @@ jobs:
           pylint src/bike_maintenance_gui.py --exit-zero
         continue-on-error: true
 
+      - name: 🧹 Clean any residual files from root
+        run: |
+          if [ -f "bike_maintenance_gui.py" ]; then
+            echo "⚠️  Found residual file in root, removing..."
+            rm bike_maintenance_gui.py
+          fi
+          echo "✅ Root directory clean"
+          
+  
       - name: 🧪 Test GUI import
         run: |
           cd src
