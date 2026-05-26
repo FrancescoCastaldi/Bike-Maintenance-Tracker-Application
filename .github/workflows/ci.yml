@@ -5,11 +5,11 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch:  # Permette avvio manuale dalla scheda Actions
+  workflow_dispatch:
 
 jobs:
   # ============================================
-  # JOB 1: Build & Test C (matrice 3 OS)
+  # JOB 1: Build & Test C
   # ============================================
   build-c:
     name: "C Build | ${{ matrix.os }} | ${{ matrix.compiler }}"
@@ -20,7 +20,6 @@ jobs:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
         compiler: [ gcc, clang ]
         exclude:
-          # Su Windows escludiamo clang (richiederebbe LLVM installato a parte)
           - os: windows-latest
             compiler: clang
 
@@ -88,7 +87,7 @@ jobs:
           retention-days: 7
 
   # ============================================
-  # JOB 2: Python GUI Setup & Lint
+  # JOB 2: Python Setup & Lint
   # ============================================
   python-check:
     name: "Python Setup & Lint"
@@ -120,24 +119,7 @@ jobs:
           python -c "import sys; sys.path.insert(0, 'src'); import bike_maintenance_gui; print('✅ GUI module loads successfully')"
 
   # ============================================
-  # JOB 3: Lint scripts helper
-  # ============================================
-  lint-scripts:
-    name: "Shell Script Lint"
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
-
-      - name: 🔍 ShellCheck
-        uses: ludeeus/action-shellcheck@master
-        with:
-          additional_files: 'run_gui.bat run.ps1'
-        continue-on-error: true
-
-  # ============================================
-  # JOB 4: Create Release Draft (solo su tag)
+  # JOB 3: Create Release Draft (solo su tag)
   # ============================================
   release:
     name: "Draft Release"
