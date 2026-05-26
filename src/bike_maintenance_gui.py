@@ -18,11 +18,7 @@ import ttkbootstrap as ttk
 from ttkbootstrap import Window
 from ttkbootstrap.constants import BOTH, END, LEFT, RIGHT, TOP, W
 from ttkbootstrap.dialogs import Messagebox
-from ttkbootstrap.widgets import DateEntry, Spinbox
-
-# ---------------------------------------------------------------------------
-# Data model and persistence helpers
-# ---------------------------------------------------------------------------
+from ttkbootstrap.widgets import DateEntry
 
 BASE_DIR = Path(__file__).resolve().parent
 RECORDS_FILE = BASE_DIR / "records.txt"
@@ -63,7 +59,6 @@ class DataManager:
         self.bike_weight: float = 0.0
         self.reload()
 
-    # -- public API -----------------------------------------------------
     def reload(self) -> None:
         self.records = self._read_records()
         self.bike_weight, self.components = self._read_components()
@@ -109,7 +104,6 @@ class DataManager:
             for component in self.components:
                 file.write(f"{component.wear_level}\n")
 
-    # -- internal helpers -----------------------------------------------
     def _read_records(self) -> List[MaintenanceRecord]:
         if not RECORDS_FILE.exists():
             return []
@@ -163,11 +157,6 @@ class DataManager:
         return weight, components
 
 
-# ---------------------------------------------------------------------------
-# Graphical interface
-# ---------------------------------------------------------------------------
-
-
 class BikeMaintenanceApp(ttk.Frame):
     def __init__(self, master: Window, manager: DataManager) -> None:
         super().__init__(master, padding=20)
@@ -175,7 +164,6 @@ class BikeMaintenanceApp(ttk.Frame):
         self.pack(fill=BOTH, expand=True)
         self._create_widgets()
 
-    # -- setup ----------------------------------------------------------
     def _create_widgets(self) -> None:
         title = ttk.Label(
             self,
@@ -191,7 +179,6 @@ class BikeMaintenanceApp(ttk.Frame):
         self._create_weight_tab(notebook)
         self._create_components_tab(notebook)
 
-    # -- records tab ----------------------------------------------------
     def _create_records_tab(self, notebook: ttk.Notebook) -> None:
         tab = ttk.Frame(notebook, padding=15)
         notebook.add(tab, text="Maintenance Records")
@@ -326,7 +313,6 @@ class BikeMaintenanceApp(ttk.Frame):
             self.manager.remove_record(index)
             self._refresh_records()
 
-    # -- bike weight tab ------------------------------------------------
     def _create_weight_tab(self, notebook: ttk.Notebook) -> None:
         tab = ttk.Frame(notebook, padding=15)
         notebook.add(tab, text="Bike Weight")
@@ -368,7 +354,6 @@ class BikeMaintenanceApp(ttk.Frame):
         self.weight_status.configure(text="Bike weight updated successfully.")
         self._refresh_weight_display()
 
-    # -- components tab -------------------------------------------------
     def _create_components_tab(self, notebook: ttk.Notebook) -> None:
         tab = ttk.Frame(notebook, padding=15)
         notebook.add(tab, text="Components")
@@ -406,7 +391,7 @@ class BikeMaintenanceApp(ttk.Frame):
         )
         self.wear_progress.pack(fill="x", pady=(5, 10))
 
-        self.wear_spin = Spinbox(
+        self.wear_spin = ttk.Spinbox(
             controls,
             from_=0,
             to=100,
@@ -457,7 +442,7 @@ class BikeMaintenanceApp(ttk.Frame):
             self.components_status.configure(text="No component data available.")
         self.wear_var.set(0)
 
-    def _on_component_select(self, event: tk.Event) -> None:  # pragma: no cover - UI callback
+    def _on_component_select(self, event: tk.Event) -> None:
         selection = self.components_tree.selection()
         if not selection:
             return
@@ -476,11 +461,6 @@ class BikeMaintenanceApp(ttk.Frame):
         self.manager.set_component_wear(index, wear_level)
         self.components_status.configure(text="Component wear level updated successfully.")
         self._refresh_components()
-
-
-# ---------------------------------------------------------------------------
-# Application entry point
-# ---------------------------------------------------------------------------
 
 
 def main() -> None:
