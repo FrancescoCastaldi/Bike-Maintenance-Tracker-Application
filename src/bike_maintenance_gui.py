@@ -14,7 +14,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import List
 
-from ttkbootstrap import Window, ttk
+import ttkbootstrap as ttk
+from ttkbootstrap import Window
 from ttkbootstrap.constants import BOTH, END, LEFT, RIGHT, TOP, W
 from ttkbootstrap.dialogs import Messagebox
 from ttkbootstrap.widgets import DateEntry, Spinbox
