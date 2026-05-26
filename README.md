@@ -1,4 +1,3 @@
-
 <!-- markdownlint-disable MD041 -->
 <p align="center">
   <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/C.svg" width="60" alt="C"/>
@@ -13,19 +12,35 @@
 </p>
 
 <p align="center">
-  <!-- Badge CI/CD – punta al workflow reale -->
-  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=CI%2FCD" alt="CI/CD">
-  </a>
-  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=for-the-badge&logo=opensourceinitiative&logoColor=white&color=blue" alt="License">
-  </a>
-  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/releases">
-    <img src="https://img.shields.io/github/v/release/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?include_prereleases&style=for-the-badge&logo=github&logoColor=white&color=brightgreen" alt="Release">
-  </a>
-  <img src="https://img.shields.io/badge/C-11-blue?style=for-the-badge&logo=c&logoColor=white" alt="C11">
-  <img src="https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey?style=for-the-badge" alt="Platform">
+
+  <!-- CI/CD & Build -->
+  [![CI/CD Pipeline](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/ci.yml/badge.svg)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/ci.yml)
+  [![Build Status](https://img.shields.io/github/actions/workflow/status/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/ci.yml?branch=master&style=flat-square&logo=githubactions&label=build)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions)
+
+  <!-- Code Quality -->
+  [![CodeQL](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/codeql.yml/badge.svg)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/codeql.yml)
+  [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
+  [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=flat-square&logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+
+  <!-- Release & Versioning -->
+  [![GitHub release](https://img.shields.io/github/v/release/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?include_prereleases&style=flat-square&logo=github)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/releases)
+  [![GitHub tag](https://img.shields.io/github/v/tag/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/tags)
+
+  <!-- Repo Stats -->
+  [![GitHub stars](https://img.shields.io/github/stars/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/stargazers)
+  [![GitHub forks](https://img.shields.io/github/forks/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/network)
+  [![GitHub issues](https://img.shields.io/github/issues/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/issues)
+  [![GitHub pull requests](https://img.shields.io/github/issues-pr/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/pulls)
+  [![GitHub last commit](https://img.shields.io/github/last-commit/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/commits)
+
+  <!-- Security & License -->
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
+  <!-- Tech Stack -->
+  [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+  [![C](https://img.shields.io/badge/C-11-00599C?style=flat-square&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C11_(C_standard_revision))
+  [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application)
+
 </p>
 
 ---
@@ -138,20 +153,7 @@ gcc -std=c11 -Wall -Wextra -O2 -o bike_track src/bike_track.c
   <img src="https://user-images.githubusercontent.com/placeholder/diagnostics-screenshot.png" width="600" alt="Diagnostics chart"/>
 </p>
 
-> The screenshot shows a sample *Diagnostics* tab: a radar/bar chart of component wear percentages, a critical‑parts list, and instant “replace now” or “monitor” suggestions.
-
----
-
-## 🧪 CI/CD & Quality Badges
-
-| Pipeline Stage        | Description                                    | Badge (example)                                                                                                 |
-|-----------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Build & Test**      | C & Python matrix build on 3 OS                | ![CI](https://img.shields.io/github/actions/workflow/status/<org>/<repo>/ci.yml?branch=main&style=flat-square) |
-| **Lint**              | clang-format, pylint, shellcheck               | ![Lint](https://img.shields.io/badge/lint-passing-brightgreen?style=flat-square)                               |
-| **CodeQL**            | Security analysis for C & Python               | ![CodeQL](https://img.shields.io/github/actions/workflow/status/<org>/<repo>/codeql.yml?branch=main&style=flat-square) |
-| **Release**           | Automated draft release on tag                 | ![Release](https://img.shields.io/github/v/release/<org>/<repo>?style=flat-square)                             |
-
-*After forking, update the `README` with your own repository paths and enable the corresponding GitHub Actions.*
+> The screenshot shows a sample *Diagnostics* tab: a radar/bar chart of component wear percentages, a critical‑parts list, and instant "replace now" or "monitor" suggestions.
 
 ---
 
@@ -172,4 +174,3 @@ Distributed under the **MIT License**. See `LICENSE` for full text.
 <p align="center">
   <sub>Built with ❤️ by cycling enthusiasts, for cycling enthusiasts.</sub>
 </p>
-```
