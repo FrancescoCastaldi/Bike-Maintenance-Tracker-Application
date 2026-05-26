@@ -1,0 +1,5 @@
+Tyres | 35
+Inner Tubes | 20
+Derailleur Cables | 75
+Brake Cables | 60
+Handlebar Tape | 45
