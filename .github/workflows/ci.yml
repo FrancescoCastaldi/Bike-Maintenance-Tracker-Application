@@ -15,7 +15,7 @@ jobs:
     name: "C Build | ${{ matrix.os }} | ${{ matrix.compiler }}"
     runs-on: ${{ matrix.os }}
     env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # elimina i warning Node.js
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     strategy:
       fail-fast: false
       matrix:
@@ -95,7 +95,7 @@ jobs:
     name: "Python Setup & Lint"
     runs-on: ubuntu-latest
     env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # elimina i warning Node.js
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: 📥 Checkout repository
@@ -134,7 +134,7 @@ jobs:
     permissions:
       contents: write
     env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # elimina i warning Node.js
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: 📥 Checkout repository
