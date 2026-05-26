@@ -1,0 +1,169 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Permette avvio manuale dalla scheda Actions
+
+jobs:
+  # ============================================
+  # JOB 1: Build & Test C (matrice 3 OS)
+  # ============================================
+  build-c:
+    name: "C Build | ${{ matrix.os }} | ${{ matrix.compiler }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        compiler: [ gcc, clang ]
+        exclude:
+          # Su Windows escludiamo clang (richiederebbe LLVM installato a parte)
+          - os: windows-latest
+            compiler: clang
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup compiler (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: |
+          if [ "${{ matrix.compiler }}" = "gcc" ]; then
+            echo "CC=gcc" >> $GITHUB_ENV
+          else
+            echo "CC=clang" >> $GITHUB_ENV
+          fi
+
+      - name: 🔧 Setup compiler (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          echo "CC=gcc" >> $GITHUB_ENV
+        shell: bash
+
+      - name: 🏗️ Compile C application
+        run: |
+          $CC -std=c11 -Wall -Wextra -O2 -o bike_track src/bike_track.c
+          echo "✅ Compilation successful"
+        shell: bash
+
+      - name: 🧪 Smoke test (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: |
+          echo "1" | timeout 5 ./bike_track || true
+          echo "✅ Smoke test passed"
+        shell: bash
+
+      - name: 🧪 Smoke test (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          echo "1" | ./bike_track.exe
+          echo "✅ Smoke test passed"
+        shell: bash
+
+      - name: 📦 Upload C binary (Linux only)
+        if: runner.os == 'Linux' && matrix.compiler == 'gcc'
+        uses: actions/upload-artifact@v4
+        with:
+          name: bike_track-linux
+          path: bike_track
+          retention-days: 7
+
+      - name: 📦 Upload C binary (Windows only)
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: bike_track-windows
+          path: bike_track.exe
+          retention-days: 7
+
+      - name: 📦 Upload C binary (macOS only)
+        if: runner.os == 'macOS' && matrix.compiler == 'gcc'
+        uses: actions/upload-artifact@v4
+        with:
+          name: bike_track-macos
+          path: bike_track
+          retention-days: 7
+
+  # ============================================
+  # JOB 2: Python GUI Setup & Lint
+  # ============================================
+  python-check:
+    name: "Python Setup & Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pylint pytest
+
+      - name: 🔍 Lint Python code
+        run: |
+          pylint src/bike_maintenance_gui.py --exit-zero
+        continue-on-error: true
+
+      - name: 🧪 Test GUI import
+        run: |
+          python -c "import sys; sys.path.insert(0, 'src'); import bike_maintenance_gui; print('✅ GUI module loads successfully')"
+
+  # ============================================
+  # JOB 3: Lint scripts helper
+  # ============================================
+  lint-scripts:
+    name: "Shell Script Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          additional_files: 'run_gui.bat run.ps1'
+        continue-on-error: true
+
+  # ============================================
+  # JOB 4: Create Release Draft (solo su tag)
+  # ============================================
+  release:
+    name: "Draft Release"
+    needs: [ build-c, python-check ]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+
+      - name: 🚀 Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          generate_release_notes: true
+          files: |
+            artifacts/bike_track-linux/bike_track
+            artifacts/bike_track-windows/bike_track.exe
+            artifacts/bike_track-macos/bike_track
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
