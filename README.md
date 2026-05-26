@@ -12,35 +12,66 @@
 </p>
 
 <p align="center">
-
   <!-- CI/CD & Build -->
-  [![CI/CD Pipeline](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/ci.yml/badge.svg)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/ci.yml)
-  [![Build Status](https://img.shields.io/github/actions/workflow/status/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/ci.yml?branch=master&style=flat-square&logo=githubactions&label=build)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions)
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/ci.yml">
+    <img src="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/ci.yml/badge.svg" alt="CI/CD Pipeline"/>
+  </a>
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/ci.yml?branch=master&style=flat-square&logo=githubactions&label=build" alt="Build Status"/>
+  </a>
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/codeql.yml">
+    <img src="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"/>
+  </a>
+</p>
 
-  <!-- Code Quality -->
-  [![CodeQL](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/codeql.yml/badge.svg)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/codeql.yml)
-  [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
-  [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=flat-square&logo=pre-commit)](https://github.com/pre-commit/pre-commit)
-
+<p align="center">
   <!-- Release & Versioning -->
-  [![GitHub release](https://img.shields.io/github/v/release/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?include_prereleases&style=flat-square&logo=github)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/releases)
-  [![GitHub tag](https://img.shields.io/github/v/tag/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/tags)
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/releases">
+    <img src="https://img.shields.io/github/v/release/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?include_prereleases&style=flat-square&logo=github" alt="GitHub release"/>
+  </a>
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/tags">
+    <img src="https://img.shields.io/github/v/tag/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square" alt="GitHub tag"/>
+  </a>
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/commits">
+    <img src="https://img.shields.io/github/last-commit/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square" alt="Last Commit"/>
+  </a>
+</p>
 
+<p align="center">
   <!-- Repo Stats -->
-  [![GitHub stars](https://img.shields.io/github/stars/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/stargazers)
-  [![GitHub forks](https://img.shields.io/github/forks/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/network)
-  [![GitHub issues](https://img.shields.io/github/issues/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/issues)
-  [![GitHub pull requests](https://img.shields.io/github/issues-pr/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/pulls)
-  [![GitHub last commit](https://img.shields.io/github/last-commit/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/commits)
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/stargazers">
+    <img src="https://img.shields.io/github/stars/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square" alt="Stars"/>
+  </a>
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/network">
+    <img src="https://img.shields.io/github/forks/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square" alt="Forks"/>
+  </a>
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/issues">
+    <img src="https://img.shields.io/github/issues/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square" alt="Issues"/>
+  </a>
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/pulls">
+    <img src="https://img.shields.io/github/issues-pr/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=flat-square" alt="Pull Requests"/>
+  </a>
+</p>
 
-  <!-- Security & License -->
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <!-- Code Quality -->
+  <a href="https://github.com/psf/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square" alt="code style: black"/>
+  </a>
+  <a href="https://github.com/pre-commit/pre-commit">
+    <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=flat-square&logo=pre-commit" alt="pre-commit"/>
+  </a>
+  <!-- License -->
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT"/>
+  </a>
+</p>
 
+<p align="center">
   <!-- Tech Stack -->
-  [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
-  [![C](https://img.shields.io/badge/C-11-00599C?style=flat-square&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C11_(C_standard_revision))
-  [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey?style=flat-square)](https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application)
-
+  <img src="https://img.shields.io/badge/C-11-00599C?style=flat-square&logo=c&logoColor=white" alt="C11"/>
+  <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey?style=flat-square" alt="Platform"/>
 </p>
 
 ---
@@ -171,6 +202,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines. (File coming soo
 ## 📜 License
 
 Distributed under the **MIT License**. See `LICENSE` for full text.
+
 <p align="center">
   <sub>Built with ❤️ by cycling enthusiasts, for cycling enthusiasts.</sub>
 </p>
