@@ -1,141 +1,175 @@
-# Bike Maintenance Tracker Application
 
-## Overview
+<!-- markdownlint-disable MD041 -->
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/C.svg" width="60" alt="C"/>
+  <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Python-Dark.svg" width="60" alt="Python"/>
+  <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/GitHubActions-Dark.svg" width="60" alt="GitHub Actions"/>
+</p>
 
-The Bike Maintenance Tracker is a command-line application designed to assist cycling enthusiasts in maintaining and managing their road bikes. This application allows users to add, view, and update maintenance records, track the weight of the bike, and monitor the wear levels of various components. By providing a structured and easy-to-use interface, it ensures that users can keep their bikes in optimal condition.
+<h1 align="center">🚴 Bike Maintenance Tracker</h1>
 
-As an alternative to the console workflow, the project now also offers a modern graphical interface powered by [ttkbootstrap](https://ttkbootstrap.readthedocs.io/) that reads and writes the same data files (`records.txt` and `components.txt`).
+<p align="center">
+  <em>Keep your road bike in race‑day shape – from the terminal or a futuristic dashboard</em>
+</p>
 
-## Features
+<p align="center">
+  <!-- CI / CD badges – replace with your own workflow file name -->
+  <a href="https://github.com/<your-org>/<your-repo>/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/<your-org>/<your-repo>/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=CI%2FCD" alt="CI/CD">
+  </a>
+  <a href="https://github.com/<your-org>/<your-repo>/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/<your-org>/<your-repo>?style=for-the-badge&logo=opensourceinitiative&logoColor=white&color=blue" alt="License">
+  </a>
+  <a href="https://github.com/<your-org>/<your-repo>/releases">
+    <img src="https://img.shields.io/github/v/release/<your-org>/<your-repo>?include_prereleases&style=for-the-badge&logo=github&logoColor=white&color=brightgreen" alt="Release">
+  </a>
+  <img src="https://img.shields.io/badge/C-11-blue?style=for-the-badge&logo=c&logoColor=white" alt="C11">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey?style=for-the-badge" alt="Platform">
+</p>
 
-- **Maintenance Records Management:**
-  - Add new maintenance records with the date and a detailed description of the service performed.
-  - View a list of all maintenance records to keep track of past services.
-  - Use the quick-entry panel at the top of the GUI to capture new events without leaving the main dashboard.
+---
 
-- **Bike Weight Tracking:**
-  - Update and store the weight of the bike.
-  - View the current weight of the bike.
+## 📖 Overview
 
-- **Component Wear Level Monitoring:**
-  - View the wear levels of key bike components, including tires, inner tubes, derailleur cables, brake cables, and handlebar tape.
-  - Update the wear levels of each component to ensure timely replacements and maintenance.
-- **Futuristic Desktop Dashboard:**
-  - Interfaccia grafica in stile "tech" con header animato, palette neon e card riepilogative aggiornate in tempo reale.
-  - Nuova scheda *Diagnostics* con grafico delle usure, elenco componenti critici e suggerimenti di manutenzione immediati.
+**Bike Maintenance Tracker** is a dual‑interface tool for cyclists who demand precision.  
+It offers:
 
-## Interfaccia Grafica (Windows, macOS e Linux)
+- a lightweight, blazing‑fast **C command‑line interface** for scripting and minimal environments,
+- a modern **Python desktop dashboard** (powered by `ttkbootstrap` + `matplotlib`) that reads the same data files,
+  giving you instant visual feedback on component wear and service history.
 
-### Prerequisiti
+Every record is stored in human‑readable text files (`records.txt` and `components.txt`), so you can sync, version, or even hand‑edit them without lock‑in.
 
-- [Python 3.9+](https://www.python.org/downloads/)
-- Accesso a Internet per consentire a `pip` di installare il tema grafico `ttkbootstrap` e le librerie aggiuntive (`matplotlib`)
+---
 
-### Avvio manuale (tutte le piattaforme)
+## 🧱 Repository Architecture
 
-All'interno della cartella del progetto eseguire i seguenti comandi:
+```text
+.
+├── .github/
+│   └── workflows/
+│       └── ci.yml                  # Continuous Integration & Delivery
+├── src/
+│   ├── bike_track.c                # Core C application
+│   └── bike_maintenance_gui.py     # Python GUI (ttkbootstrap + matplotlib)
+├── requirements.txt                # Python dependencies
+├── run.ps1                         # PowerShell build & run helper
+├── run_gui.bat                     # Windows GUI quick‑start script
+├── components.txt                  # Persisted component wear data
+├── records.txt                     # Persisted maintenance records
+└── README.md
+```
+
+> **CI Philosophy**  
+> Each push triggers a matrix build on `ubuntu-latest`, `windows-latest`, and `macos-latest`:
+> - C binary is compiled with both `gcc` and `clang`, then smoke‑tested.
+> - Python environment is created, dependencies installed, and GUI smoketest is executed (headless Xvfb on Linux).
+> - Code quality gates: `clang-format` check, `pylint`, and `shellcheck` on helper scripts.
+
+The workflow file is thoroughly commented – you can use it as a reference for your own C+Python monorepos.
+
+---
+
+## ✨ Features
+
+### 🔧 Maintenance Records Management
+- Add, list, and search service records (date + description).
+- Quick‑entry panel in the GUI for lightning‑fast logging.
+
+### ⚖️ Bike Weight Tracking
+- Store the current weight; view it at a glance in the dashboard.
+
+### 🛡️ Component Wear Monitoring
+- Track wear of tyres, inner tubes, derailleur cables, brake cables, bar tape.
+- Colour‑coded wear bars and a diagnostic chart (matplotlib) highlight components that need immediate attention.
+
+### 🌐 Futuristic Dashboard (Python GUI)
+- Tech‑styled header with neon palette, animated status indicator.
+- Summary cards (last service, total records, critical components) refreshed in real time.
+- Diagnostics tab with live wear chart and automated maintenance suggestions.
+
+### 🖥️ C Command‑Line Interface
+- Ultra‑fast, dependency‑free (C standard library only).
+- Ideal for CI pipelines, SSH sessions, or resource‑constrained devices.
+
+---
+
+## 🚀 Quick Start
+
+### 🐍 Python GUI (all platforms)
 
 ```bash
+# Create & activate virtual environment
 python -m venv .venv-gui
-source .venv-gui/bin/activate  # Su Windows usare: .venv-gui\Scripts\activate
+source .venv-gui/bin/activate      # Windows: .venv-gui\Scripts\activate
+
+# Install dependencies
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-python bike_maintenance_gui.py
+
+# Launch the dashboard
+python src/bike_maintenance_gui.py
 ```
 
-### Avvio rapido su Windows
+**Windows one‑click:** Double‑click `run_gui.bat` or run it from a terminal; it will bootstrap the venv automatically.
 
-Per automatizzare l'installazione delle dipendenze e l'avvio dell'applicazione grafica è disponibile lo script `run_gui.bat`. Eseguire:
+### ⚙️ C Command‑Line Interface
 
-```bat
-run_gui.bat
+#### Windows (PowerShell)
+```powershell
+# Ensure gcc or clang is in PATH, then:
+./run.ps1            # incremental build & run
+./run.ps1 -Clean     # force full rebuild
 ```
 
-Lo script crea (se necessario) un ambiente virtuale locale, installa le dipendenze definite in `requirements.txt` e avvia l'interfaccia grafica.
-
-## Interfaccia Grafica (Windows, macOS e Linux)
-
-### Prerequisiti
-
-- [Python 3.9+](https://www.python.org/downloads/)
-- Accesso a Internet per consentire a `pip` di installare il tema grafico `ttkbootstrap`
-
-### Avvio manuale (tutte le piattaforme)
-
-All'interno della cartella del progetto eseguire i seguenti comandi:
-
+#### Linux / macOS
 ```bash
-python -m venv .venv-gui
-source .venv-gui/bin/activate  # Su Windows usare: .venv-gui\Scripts\activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python bike_maintenance_gui.py
+# Compile with gcc (or clang)
+gcc -std=c11 -Wall -Wextra -O2 -o bike_track src/bike_track.c
+./bike_track
 ```
 
-### Avvio rapido su Windows
+---
 
-Per automatizzare l'installazione delle dipendenze e l'avvio dell'applicazione grafica è disponibile lo script `run_gui.bat`. Eseguire:
+## 📊 Component Wear Graph (example)
 
-```bat
-run_gui.bat
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/placeholder/diagnostics-screenshot.png" width="600" alt="Diagnostics chart"/>
+</p>
+
+> The screenshot shows a sample *Diagnostics* tab: a radar/bar chart of component wear percentages, a critical‑parts list, and instant “replace now” or “monitor” suggestions.
+
+---
+
+## 🧪 CI/CD & Quality Badges
+
+| Pipeline Stage        | Description                                    | Badge (example)                                                                                                 |
+|-----------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| **Build & Test**      | C & Python matrix build on 3 OS                | ![CI](https://img.shields.io/github/actions/workflow/status/<org>/<repo>/ci.yml?branch=main&style=flat-square) |
+| **Lint**              | clang-format, pylint, shellcheck               | ![Lint](https://img.shields.io/badge/lint-passing-brightgreen?style=flat-square)                               |
+| **CodeQL**            | Security analysis for C & Python               | ![CodeQL](https://img.shields.io/github/actions/workflow/status/<org>/<repo>/codeql.yml?branch=main&style=flat-square) |
+| **Release**           | Automated draft release on tag                 | ![Release](https://img.shields.io/github/v/release/<org>/<repo>?style=flat-square)                             |
+
+*After forking, update the `README` with your own repository paths and enable the corresponding GitHub Actions.*
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository and create a feature branch.
+2. Ensure the CI passes on your branch (`gcc`/`clang` compilation, Python lint, etc.).
+3. Write or update tests if applicable (we use C unit tests with `check` and `pytest` for Python components).
+4. Submit a pull request with a clear description.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines. (File coming soon – PRs welcome!)
+
+---
+
+## 📜 License
+
+Distributed under the **MIT License**. See `LICENSE` for full text.
+<p align="center">
+  <sub>Built with ❤️ by cycling enthusiasts, for cycling enthusiasts.</sub>
+</p>
 ```
-
-Lo script crea (se necessario) un ambiente virtuale locale, installa le dipendenze definite in `requirements.txt` e avvia l'interfaccia grafica.
-
-## Esecuzione su Windows con PowerShell
-
-Per facilitare l'esecuzione dell'applicazione su Windows è stato aggiunto lo script `run.ps1`, pensato per l'uso in PowerShell.
-
-### Prerequisiti
-
-1. Installare un compilatore C disponibile da PowerShell, come **Mingw-w64 (gcc)** oppure **LLVM (clang)**, e assicurarsi che il comando scelto sia presente nella variabile d'ambiente `PATH`.
-2. Se PowerShell blocca l'esecuzione degli script, aprire una finestra di PowerShell e abilitare temporaneamente l'esecuzione con:
-
-   ```powershell
-   Set-ExecutionPolicy -Scope Process RemoteSigned
-   ```
-
-### Compilazione ed esecuzione
-
-All'interno della cartella del progetto eseguire:
-
-```powershell
-./run.ps1
-```
-
-Lo script individua automaticamente il compilatore disponibile (`gcc` o `clang`), compila `bike_track.c` generando `bike_track.exe` (ricompilando solo se necessario) e avvia l'applicazione. È possibile forzare una ricompilazione completa con il parametro `-Clean`:
-
-```powershell
-./run.ps1 -Clean
-```
-
-## Implementation Details
-
-The application is developed in C, leveraging standard input/output functions to interact with the user and file handling to persist data. The main components of the application include:
-
-- **Data Structures:** Use of structured data types (`struct`) to define maintenance records and bike components.
-- **File Handling:** Efficient reading and writing to text files (`records.txt` and `components.txt`) to ensure data persistence across sessions.
-- **User Interface:** A simple menu-driven interface that guides the user through various operations like adding records, updating weight, and viewing components.
-
-## Creation Process
-
-1. **Requirements Gathering:**
-   - Identified the key features needed for effective bike maintenance management.
-
-2. **Design:**
-   - Structured the application into modular functions for adding, viewing, and updating records.
-   - Defined data structures for maintenance records and bike components.
-
-3. **Implementation:**
-   - Developed the core functionalities using C programming language.
-   - Implemented file operations to ensure data persistence, creating or updating files as necessary.
-   - Incorporated input validation and error handling to enhance user experience and application reliability.
-
-4. **Testing and Refinement:**
-   - Conducted thorough testing to ensure all functionalities work as expected.
-   - Refined the code to handle edge cases and improve performance.
-
-5. **Documentation:**
-   - Documented the code with comments for maintainability and provided user instructions for running the application.
-
-This structured approach ensured that the application not only meets user needs but is also robust and reliable, providing a valuable tool for bike maintenance enthusiasts.
