@@ -13,15 +13,15 @@
 </p>
 
 <p align="center">
-  <!-- CI / CD badges – replace with your own workflow file name -->
-  <a href="https://github.com/<your-org>/<your-repo>/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/<your-org>/<your-repo>/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=CI%2FCD" alt="CI/CD">
+  <!-- Badge CI/CD – punta al workflow reale -->
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=CI%2FCD" alt="CI/CD">
   </a>
-  <a href="https://github.com/<your-org>/<your-repo>/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/<your-org>/<your-repo>?style=for-the-badge&logo=opensourceinitiative&logoColor=white&color=blue" alt="License">
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?style=for-the-badge&logo=opensourceinitiative&logoColor=white&color=blue" alt="License">
   </a>
-  <a href="https://github.com/<your-org>/<your-repo>/releases">
-    <img src="https://img.shields.io/github/v/release/<your-org>/<your-repo>?include_prereleases&style=for-the-badge&logo=github&logoColor=white&color=brightgreen" alt="Release">
+  <a href="https://github.com/FrancescoCastaldi/Bike-Maintenance-Tracker-Application/releases">
+    <img src="https://img.shields.io/github/v/release/FrancescoCastaldi/Bike-Maintenance-Tracker-Application?include_prereleases&style=for-the-badge&logo=github&logoColor=white&color=brightgreen" alt="Release">
   </a>
   <img src="https://img.shields.io/badge/C-11-blue?style=for-the-badge&logo=c&logoColor=white" alt="C11">
   <img src="https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python">
